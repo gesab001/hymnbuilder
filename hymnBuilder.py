@@ -17,7 +17,7 @@ lines = [line.strip('\n') for line in lines]
 lines = [line.strip(" ") for line in lines]
 #filter(None,list)
 #lines = [lines.remove(line) for line in lines if line=='']
-print (lines)
+#print (lines)
 
 for line in lines:
   if line!='': 
@@ -25,7 +25,9 @@ for line in lines:
     if len(titleAndVerse)>1:
       numberAndTitle = titleAndVerse[0].split("  ")
       number = numberAndTitle[0]
-      title =  numberAndTitle[1]
+      title =  numberAndTitle[2]
+      if title=="":
+         title=numberAndTitle[3]
       verses = titleAndVerse[1]
       addHymn(number, title, verses)
 
