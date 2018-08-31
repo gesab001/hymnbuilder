@@ -6,7 +6,7 @@ def addHymn(number, title, verses):
         conn = sqlite3.connect('hymn2.db')
         conn.execute("INSERT INTO HYMNS (NUMBER, TITLE, VERSES) VALUES(?, ?, ?)", (number, title, verses));
         conn.commit()
-        print (number + " " + str(title) + "  added successfully");
+        print (str(number) + " " + str(title) + "  added successfully");
         conn.close()    
 
 response = requests.get('http://sdahymnals.com/Hymnal/')
@@ -92,6 +92,7 @@ for link in hymnlinks:
   completeHymn = completeHymn.replace("\\n ", "\n")
   completeHymn = completeHymn.replace("&#8217;", "'")
   completeHymn = completeHymn.replace("\\xe2\\x80\\x94", "-")
+  completeHymn = completeHymn.replace("\\xe2\\x80\\x99", "'")
   completeHymn = completeHymn.replace("\\xe2\\x80\\x93", "-")
   completeHymn = completeHymn.replace("\\xe2\\x80\\x9c", "\"")
   completeHymn = completeHymn.replace("&#8216;", "'")
