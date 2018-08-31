@@ -57,6 +57,7 @@ for value in numbercategories:
 
 hymnsList = []
 aHymn = []
+count = 1
 for link in hymnlinks:
   response = requests.get(link)
   hymnWords = str(response.content)
@@ -93,6 +94,12 @@ for link in hymnlinks:
   completeHymn = completeHymn.replace("\\xe2\\x80\\x94", "-")
   completeHymn = completeHymn.replace("\\xe2\\x80\\x93", "-")
   completeHymn = completeHymn.replace("\\xe2\\x80\\x9c", "\"")
+  completeHymn = completeHymn.replace("&#8216;", "'")
+  completeHymn = completeHymn.replace("&#8220;", "")
+  completeHymn = completeHymn.replace("&#8221;", "")
+  completeHymn = completeHymn.replace("\\xe2\\x80\\x98", "")
+  completeHymn = completeHymn.replace("&", "")
+  completeHymn = completeHymn.replace(";'", "'")
   completeHymn = completeHymn.replace(" Refrain", "Refrain")
 #completeHymn = completeHymn.replace("
   print(len(titleSplit))
@@ -100,10 +107,20 @@ for link in hymnlinks:
   print (completeHymn)
 #print(hymnWords[9122:])
 #  for string in verses2:
+  number = count
+  title = hymnTitle
+  verses = completeHymn
+  addHymn(number, title, verses)
+  aHymn = []
+  count = count +1
+
+"""
   aHymn.append(hymnTitle)
   aHymn.append(completeHymn)
   hymnsList.append(aHymn)
+
   aHymn = []
+  count = count +1
 
 
 print(len(hymnsList))
@@ -119,3 +136,4 @@ for x in range(0,len(hymnsList)+1, 1):
       myfile.close()
 
     #addHymn(number, title, verses)
+"""
