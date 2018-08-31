@@ -1,6 +1,27 @@
 import requests
 import os
 import sqlite3
+import mysql.connector
+
+def addHymnMYSQL(number, title, verses):
+    mydb = mysql.connector.connect(
+       host="bibledb.cvtfhbljhzkg.ap-southeast-2.rds.amazonaws.com",
+       user="giovanni",
+       passwd="mypassword",
+       database="bible"
+    )
+    print(mydb) 
+
+    mycursor = mydb.cursor()
+
+    sql = "INSERT INTO HYMNS (NUMBER, TITLE, VERSES) VALUES (%s, %s, %s)"
+    val = (number, title, verses)
+    mycursor.execute(sql, val)
+
+    mydb.commit()
+
+    print(mycursor.rowcount, title, "successful")
+
 
 def addHymn(number, title, verses):
         conn = sqlite3.connect('hymn2.db')
@@ -25,7 +46,7 @@ for hymn in hymntitles:
 
 print (len(hymnlinks))
 
-print (hymnlinks[0])
+#print (hymnlinks[0])
 
 response = requests.get(hymnlinks[0])
 #print(response.status_code)
@@ -103,15 +124,16 @@ for link in hymnlinks:
   completeHymn = completeHymn.replace(";'", "'")
   completeHymn = completeHymn.replace(" Refrain", "Refrain")
 #completeHymn = completeHymn.replace("
-  print(len(titleSplit))
-  print(hymnTitle)
-  print (completeHymn)
+ # print(len(titleSplit))
+ # print(hymnTitle)
+ # print (completeHymn)
 #print(hymnWords[9122:])
 #  for string in verses2:
   number = count
   title = hymnTitle
   verses = completeHymn
-  addHymn(number, title, verses)
+  #addHymn(number, title, verses)
+  addHymnMYSQL(number, title, verses)
   aHymn = []
   count = count +1
 
